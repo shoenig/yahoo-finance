@@ -71,9 +71,17 @@ type Chart struct {
 	TickerData struct {
 		Results []struct {
 			Meta struct {
-				Currency string `json:"currency"`
-				Symbol   string `json:"symbol"`
-				Exchange string `json:"exchange"`
+				Currency       string  `json:"currency"`
+				Symbol         string  `json:"symbol"`
+				Exchange       string  `json:"exchangeName"`
+				Instrument     string  `json:"instrumentType"`
+				FirstTrade     uint64  `json:"firstTradeDate"`
+				MarketTime     uint64  `json:"regularMarketTime"`
+				GMTOffset      int     `json:"gmtoffset"`
+				TimeZone       string  `json:"timezone"`
+				TimeZoneName   string  `json:"exchangeTimezoneName"`
+				MarketPrice    float64 `json:"regularMarketPrice"`
+				PrevClosePrice float64 `json:"previousClose"`
 			} `json:"meta"`
 		} `json:"result"`
 	} `json:"chart"`
