@@ -44,7 +44,7 @@ func (c *Chart) Currency() string {
 	return c.TickerData.Results[0].Meta.Currency
 }
 
-func (c *Chart) Ticker() string {
+func (c *Chart) Symbol() string {
 	if c.empty() {
 		return ""
 	}
@@ -94,4 +94,28 @@ func (c *Chart) MarketTime() time.Time {
 	}
 
 	return time.Unix(c.TickerData.Results[0].Meta.MarketTime, 0)
+}
+
+func (c *Chart) Price() float64 {
+	if c.empty() {
+		return 0
+	}
+
+	return c.TickerData.Results[0].Meta.MarketPrice
+}
+
+func (c *Chart) PrevClosePrice() float64 {
+	if c.empty() {
+		return 0
+	}
+
+	return c.TickerData.Results[0].Meta.PrevClosePrice
+}
+
+func (c *Chart) Delta() float64 {
+	if c.empty() {
+		return 0
+	}
+
+	return c.Price() - c.PrevClosePrice()
 }
