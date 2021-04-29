@@ -119,3 +119,13 @@ func (c *Chart) Delta() float64 {
 
 	return c.Price() - c.PrevClosePrice()
 }
+
+func (c *Chart) DeltaPerc() float64 {
+	if c.empty() {
+		return 0
+	}
+
+	d := c.Delta()
+	p := d / c.PrevClosePrice()
+	return p * 100
+}
