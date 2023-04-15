@@ -4,8 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-
-	"github.com/hashicorp/go-cleanhttp"
+	"time"
 )
 
 const (
@@ -34,7 +33,9 @@ func New(opts *Options) Client {
 
 	httpClient := opts.HTTPClient
 	if httpClient == nil {
-		httpClient = cleanhttp.DefaultPooledClient()
+		httpClient = &http.Client{
+			Timeout: 5 * time.Second,
+		}
 	}
 
 	return &client{
